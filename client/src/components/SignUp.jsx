@@ -1,9 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState({
+    username: "",
+    email: "",
+    passowrd: "",
+    password_confirmation: "",
+  });
+
+  const { username, email, password, password_confirmation } = inputValue;
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
+
+  const handleError = (err) =>
+    toast.error(err, {
+      position: "bottom-left",
+    });
+
+  const handleSuccess = (msg) =>
+    toast.success(msg, {
+      position: "bottom-right",
+    });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/signup",
+        {
+          ...inputValue,
+        },
+        { withCredentials: true }
+      );
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
+      } else {
+        handleError(message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setInputValue({
+      ...inputValue,
+      username: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+    });
+  };
+
   return (
     <div class="bg-white relative lg:py-20">
       <div
@@ -19,6 +80,7 @@ const SignUp = () => {
               />
             </div>
           </div>
+
           <div class="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
             <div
               class="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
@@ -27,82 +89,116 @@ const SignUp = () => {
               <p class="w-full text-4xl font-medium text-center leading-snug font-serif">
                 Sign up for an account
               </p>
-              <div class="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
-                <div class="relative">
-                  <p
-                    class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+              <form onSubmit={handleSubmit}>
+                <div class="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+                  <div class="relative">
+                    <p
+                      class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
                   absolute"
-                  >
-                    Username
-                  </p>
-                  <input
-                    placeholder="John"
-                    type="text"
-                    class="border placeholder-gray-400 focus:outline-none
+                    >
+                      Username
+                    </p>
+                    <input
+                      placeholder="John"
+                      type="text"
+                      name="username"
+                      value={username}
+                      class="border placeholder-gray-400 focus:outline-none
                   focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
-                  />
-                </div>
-                <div class="relative">
-                  <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                    Email
-                  </p>
-                  <input
-                    placeholder="123@ex.com"
-                    type="text"
-                    class="border placeholder-gray-400 focus:outline-none
+                      onChange={handleOnChange}
+                    />
+                  </div>
+                  <div class="relative">
+                    <p class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                      Email
+                    </p>
+                    <input
+                      placeholder="123@ex.com"
+                      type="email"
+                      name="email"
+                      value={email}
+                      class="border placeholder-gray-400 focus:outline-none
                   focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
-                  />
-                </div>
-                <div class="relative">
-                  <p
-                    class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+                      onChange={handleOnChange}
+                    />
+                  </div>
+                  <div class="relative">
+                    <p
+                      class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
                   absolute"
-                  >
-                    Password
-                  </p>
-                  <input
-                    placeholder="Password"
-                    type="password"
-                    class="border placeholder-gray-400 focus:outline-none
+                    >
+                      Password
+                    </p>
+                    <input
+                      placeholder="Password"
+                      type="password"
+                      name="password"
+                      value={password}
+                      class="border placeholder-gray-400 focus:outline-none
                   focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
-                  />
-                </div>
-                <div class="relative">
-                  <a
-                    class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-yellow-500
+                      onChange={handleOnChange}
+                    />
+                  </div>
+                  <div class="relative">
+                    <p
+                      class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+                  absolute"
+                    >
+                      Confirm Password
+                    </p>
+                    <input
+                      placeholder="Password"
+                      type="password"
+                      name="password_confirmation"
+                      value={password_confirmation}
+                      class="border placeholder-gray-400 focus:outline-none
+                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  border-gray-300 rounded-md"
+                      onChange={handleOnChange}
+                    />
+                  </div>
+
+                  <div class="relative">
+                    <button
+                      type="submit"
+                      class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-yellow-500
                   rounded-lg transition duration-200 hover:bg-yellow-600 ease"
-                  >
-                    Submit
-                  </a>
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div class="p-5 w-full">
-                <div class="grid grid-cols-2 gap-1">
-                  <button
-                    type="button"
-                    class="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center flex justify-center items-center"
-                  >
-                    <FcGoogle className="mr-3" />
-                    Google
-                  </button>
-                  <button
-                    type="button"
-                    class="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center flex justify-center items-center"
-                  >
-                    <FaGithub className="mr-3" />
-                    Github
-                  </button>
+                <div class="p-5 w-full">
+                  <div class="grid grid-cols-2 gap-1">
+                    <button
+                      type="button"
+                      class="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center flex justify-center items-center"
+                    >
+                      <FcGoogle className="mr-3" />
+                      Google
+                    </button>
+                    <button
+                      type="button"
+                      class="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center flex justify-center items-center"
+                    >
+                      <FaGithub className="mr-3" />
+                      Github
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="flex">
-                <p className="text-gray-500 ">Already have an account?</p>
-                <Link to="/login" className="text-yellow-500 absolute right-10">
-                  Sign in
-                </Link>
-              </div>
+                <div className="flex">
+                  <p className="text-gray-500 ">Already have an account?</p>
+                  <Link
+                    to="/login"
+                    className="text-yellow-500 absolute right-10"
+                  >
+                    Sign in
+                  </Link>
+                </div>
+              </form>
             </div>
 
             <div class="py-5">
@@ -318,6 +414,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

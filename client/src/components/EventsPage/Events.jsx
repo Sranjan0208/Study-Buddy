@@ -16,7 +16,6 @@ const Events = () => {
               <h1 class="text-3xl font-bold mb-10">Events</h1>
               <hr class="my-5" />
               <h1 className="flex items-center justify-center text-4xl">
-                {" "}
                 COMING SOON !!
               </h1>
             </div>
