@@ -6,6 +6,6 @@ const { userVerification } = require("../middlewares/auth.middlewares");
 
 router.post("/signup", Signup);
 router.post("/login", Login);
-router.post("/dashboard/*", userVerification);
+router.post("/", userVerification);
 
 module.exports = router;

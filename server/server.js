@@ -2,9 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const bodyParser = require("body-parser");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth.routes");
+const taskRoute = require("./routes/task.routes");
 const { DATABASE, PORT } = process.env;
 
 mongoose
@@ -28,6 +30,9 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use(express.json());
+app.use(bodyParser.json());
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", authRoute);
+
+app.use("/tasks", taskRoute);
