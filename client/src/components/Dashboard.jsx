@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Navbar from "./Navbar";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Dashboard = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000/dashboard",
+        "http://localhost:8000",
         {},
         { withCredentials: true }
       );
@@ -40,10 +41,7 @@ const Dashboard = () => {
 
   return (
     <div className="bg-yellow-50 h-[100%]">
-      <h1 className="text-4xl text-center font-bold pt-10">
-        Welcome to your dashboard!
-      </h1>
-
+      <Navbar title="Dashboard" />
       <main class=" h-screen relative overflow-auto">
         <div class="px-6 py-8 h-[90%]">
           <div class="max-w-[100%] h-[100%] flex">

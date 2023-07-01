@@ -5,11 +5,11 @@ const {
   updateTask,
   deleteTask,
 } = require("../controllers/task.controller");
-const { userVerification } = require("../middlewares/auth.middlewares");
+const { userVerificationForTask } = require("../middlewares/task.middlewares");
 
-router.use(userVerification);
+router.use(userVerificationForTask);
 
-router.post("/", addTask);
+router.post("/tasks", addTask);
 router.put("/:taskId", updateTask);
 router.delete("/:taskId", deleteTask);
 

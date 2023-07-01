@@ -35,4 +35,4 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", authRoute);
 
-app.use("/tasks", taskRoute);
+app.use("/", taskRoute);

@@ -4,8 +4,6 @@ const Task = require("../models/TaskModel");
 module.exports.addTask = async (req, res) => {
   try {
     const { title, column } = req.body;
-    console.log(req.body);
-    console.log(req.user);
 
     const newTask = new Task({
       title,
@@ -17,10 +15,10 @@ module.exports.addTask = async (req, res) => {
     });
 
     const createdTask = await newTask.save();
-    res.status(201).json(createdTask);
+    return res.status(201).json(createdTask);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server Error" });
+    return res.status(500).json({ error: "Server Error" });
   }
 };
 

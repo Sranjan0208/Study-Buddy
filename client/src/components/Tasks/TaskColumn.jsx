@@ -53,8 +53,8 @@ const TaskColumn = ({ title, tasks, onAddTask, onEditTask, onDeleteTask }) => {
       </div>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id} className="bg-white rounded-lg p-4 shadow mb-4">
-            {editTaskId === task.id ? (
+          <li key={task._id} className="bg-white rounded-lg p-4 shadow mb-4">
+            {editTaskId === task._id ? (
               <div className="flex justify-between items-center">
                 <input
                   type="text"
@@ -65,7 +65,7 @@ const TaskColumn = ({ title, tasks, onAddTask, onEditTask, onDeleteTask }) => {
                 />
                 <div>
                   <button
-                    onClick={() => handleSaveEditing(task.id)}
+                    onClick={() => handleSaveEditing(task._id)}
                     className="text-green-500 hover:text-green-700 focus:outline-none mr-2"
                   >
                     Save
@@ -83,13 +83,13 @@ const TaskColumn = ({ title, tasks, onAddTask, onEditTask, onDeleteTask }) => {
                 <span>{task.title}</span>
                 <div>
                   <button
-                    onClick={() => handleStartEditing(task.id, task.title)}
+                    onClick={() => handleStartEditing(task._id, task.title)}
                     className="text-blue-500 hover:text-blue-700 focus:outline-none mr-2"
                   >
                     <RiEdit2Line />
                   </button>
                   <button
-                    onClick={() => handleDeleteTask(task.id)}
+                    onClick={() => handleDeleteTask(task._id)}
                     className="text-red-500 hover:text-red-700 focus:outline-none"
                   >
                     <RiDeleteBin6Line />

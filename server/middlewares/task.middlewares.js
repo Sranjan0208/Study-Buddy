@@ -2,7 +2,7 @@ const User = require("../models/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-module.exports.userVerification = (req, res, next) => {
+module.exports.userVerificationForTask = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.json({ status: false });
@@ -13,8 +13,8 @@ module.exports.userVerification = (req, res, next) => {
     } else {
       const user = await User.findById(data.id);
       if (user) {
+        // errors faced here: Error: Can't set headers after they are sent. Solution: particular error occurs whenever you try to send more than one response to the same request
         req.user = user;
-        res.json({ status: true, user: user.username });
         next();
       } else {
         return res.json({ status: false });

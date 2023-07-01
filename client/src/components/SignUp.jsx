@@ -89,8 +89,11 @@ const SignUp = () => {
               <p class="w-full text-4xl font-medium text-center leading-snug font-serif">
                 Sign up for an account
               </p>
-              <form onSubmit={handleSubmit}>
-                <div class="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+              <form
+                onSubmit={handleSubmit}
+                class="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8"
+              >
+                <div>
                   <div class="relative">
                     <p
                       class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
@@ -104,8 +107,7 @@ const SignUp = () => {
                       name="username"
                       value={username}
                       class="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-                  border-gray-300 rounded-md"
+                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-6 ml-0 text-base block bg-white border-gray-300 rounded-md"
                       onChange={handleOnChange}
                     />
                   </div>
@@ -119,7 +121,7 @@ const SignUp = () => {
                       name="email"
                       value={email}
                       class="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-6 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                       onChange={handleOnChange}
                     />
@@ -137,7 +139,7 @@ const SignUp = () => {
                       name="password"
                       value={password}
                       class="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-6 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                       onChange={handleOnChange}
                     />
@@ -155,7 +157,7 @@ const SignUp = () => {
                       name="password_confirmation"
                       value={password_confirmation}
                       class="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
+                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-6 ml-0 text-base block bg-white
                   border-gray-300 rounded-md"
                       onChange={handleOnChange}
                     />
