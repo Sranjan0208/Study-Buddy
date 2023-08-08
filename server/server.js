@@ -5,9 +5,18 @@ const app = express();
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const { Server } = require("socket.io");
+
 const authRoute = require("./routes/auth.routes");
 const taskRoute = require("./routes/task.routes");
 const { DATABASE, PORT } = process.env;
+
+const io = new Server(3000, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
 
 mongoose
   .connect(DATABASE, {

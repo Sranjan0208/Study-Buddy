@@ -162,7 +162,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </main>
     </div>
   );

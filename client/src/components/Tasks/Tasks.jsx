@@ -44,23 +44,22 @@ const Tasks = () => {
   const [doingTasks, setDoingTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
 
+  const fetchTasks = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:8000/tasks", {
+        withCredentials: true,
+      });
+
+      console.log(data);
+
+      setTodoTasks(data.filter((task) => task.column === "Todo"));
+      setDoingTasks(data.filter((task) => task.column === "Doing"));
+      setCompletedTasks(data.filter((task) => task.column === "Completed"));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:8000/tasks", {
-          withCredentials: true,
-        });
-
-        console.log(data);
-
-        setTodoTasks(data.filter((task) => task.column === "Todo"));
-        setDoingTasks(data.filter((task) => task.column === "Doing"));
-        setCompletedTasks(data.filter((task) => task.column === "Completed"));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     fetchTasks();
   }, []);
 
@@ -81,19 +80,20 @@ const Tasks = () => {
       switch (column) {
         case "Todo":
           setTodoTasks((prevTasks) => [...prevTasks, newTask]);
-          navigate("/tasks");
+
           break;
         case "Doing":
           setDoingTasks((prevTasks) => [...prevTasks, newTask]);
-          navigate("/tasks");
+
           break;
         case "Completed":
           setCompletedTasks((prevTasks) => [...prevTasks, newTask]);
-          navigate("/tasks");
+
           break;
         default:
           break;
       }
+      fetchTasks();
     } catch (err) {
       console.log(err);
     }
@@ -103,7 +103,7 @@ const Tasks = () => {
   const handleEditTask = async (taskId, newTitle, column) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/tasks/:${taskId}`,
+        `http://localhost:8000/tasks/${taskId}`,
         {
           title: newTitle,
           column,
@@ -133,6 +133,7 @@ const Tasks = () => {
         default:
           break;
       }
+      fetchTasks();
     } catch (err) {
       console.log(err);
     }
@@ -140,7 +141,7 @@ const Tasks = () => {
 
   const handleDeleteTask = async (taskId, column) => {
     try {
-      await axios.delete(`http://localhost:8000/tasks/:${taskId}`, {
+      await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
         withCredentials: true,
       });
       switch (column) {
@@ -162,6 +163,7 @@ const Tasks = () => {
         default:
           break;
       }
+      fetchTasks();
     } catch (err) {
       console.log(err);
     }

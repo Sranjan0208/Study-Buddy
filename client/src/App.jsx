@@ -9,6 +9,8 @@ import Group from "./components/Groups/Group.jsx";
 import Events from "./components/EventsPage/Events.jsx";
 import About from "./components/About";
 import ErrorPage from "./components/ErrorPage.jsx";
+import SettingsPage from "./components/Settings.jsx";
+import Messages from "./components/Messages.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -50,6 +52,16 @@ const App = () => {
     {
       path: "/events",
       element: <Events />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/settings",
+      element: <SettingsPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/messages",
+      element: <Messages />,
       errorElement: <ErrorPage />,
     },
   ]);

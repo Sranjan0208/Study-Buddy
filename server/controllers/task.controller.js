@@ -1,5 +1,16 @@
 const Task = require("../models/TaskModel");
 
+// Get all tasks
+module.exports.getAllTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({ userId: req.user.id }); // Only allow getting tasks that belong to the authenticated user
+    return res.status(200).json(tasks);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Server Error" });
+  }
+};
+
 // Create a new task
 module.exports.addTask = async (req, res) => {
   try {

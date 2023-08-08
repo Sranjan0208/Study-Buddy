@@ -60,7 +60,7 @@ const Sidebar = () => {
           </button>
         </Link>
         <Link
-          to={"/profile"}
+          to={"/settings"}
           className="w-[100%] text-white font-bold text-xl hover:bg-yellow-100 rounded-xl transition duration-200 hover:text-yellow-500 ease-in-out mb-4 "
         >
           <button className="flex">
