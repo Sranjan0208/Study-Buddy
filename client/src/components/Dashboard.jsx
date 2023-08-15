@@ -60,7 +60,7 @@ const Dashboard = () => {
                       <div class="p-4 bg-green-100 rounded-xl">
                         <div class="font-bold text-xl text-gray-800 leading-none">
                           Good day, <br />
-                          Kristin
+                          Sujal
                         </div>
                         <div class="mt-5">
                           <button

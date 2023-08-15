@@ -55,6 +55,7 @@ const Tasks = () => {
       setTodoTasks(data.filter((task) => task.column === "Todo"));
       setDoingTasks(data.filter((task) => task.column === "Doing"));
       setCompletedTasks(data.filter((task) => task.column === "Completed"));
+      navigate("/tasks");
     } catch (err) {
       console.log(err);
     }
