@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,17 @@ import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (cookies.token) {
+        navigate("/dashboard");
+      }
+    };
+    verifyCookie();
+  }, [cookies, navigate]);
+
   const [inputValue, setInputValue] = useState({
     username: "",
     email: "",
@@ -72,11 +84,12 @@ const SignUp = () => {
       xl:px-5 lg:flex-row"
       >
         <div class="flex flex-col items-center w-full pt-5 pr-10 pb-20 pl-10 lg:pt-20 lg:flex-row">
-          <div class="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
-            <div class="flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
+          <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12 hidden lg:block">
+            <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
               <img
                 src="https://res.cloudinary.com/macxenon/image/upload/v1631570592/Run_-_Health_qcghbu.png"
-                class="btn-"
+                className="btn-"
+                alt="Logo"
               />
             </div>
           </div>
@@ -86,7 +99,7 @@ const SignUp = () => {
               class="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
             relative z-10"
             >
-              <p class="w-full text-4xl font-medium text-center leading-snug font-serif">
+              <p class="w-full lg:text-4xl font-medium text-center leading-snug font-serif text-xl">
                 Sign up for an account
               </p>
               <form
@@ -146,7 +159,7 @@ const SignUp = () => {
                   </div>
                   <div class="relative">
                     <p
-                      class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
+                      class="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium  text-gray-600
                   absolute"
                     >
                       Confirm Password
@@ -174,7 +187,7 @@ const SignUp = () => {
                   </div>
                 </div>
                 <div class="p-5 w-full">
-                  <div class="grid grid-cols-2 gap-1">
+                  <div class="lg:grid lg:grid-cols-2 grid gap-2 grid-cols-1 grid-rows-2 lg:gap-1">
                     <button
                       type="button"
                       class="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center flex justify-center items-center"
@@ -191,11 +204,11 @@ const SignUp = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex">
+                <div className="lg:flex flex flex-col">
                   <p className="text-gray-500 ">Already have an account?</p>
                   <Link
                     to="/login"
-                    className="text-yellow-500 absolute right-10"
+                    className="text-yellow-500 lg:absolute lg:right-10"
                   >
                     Sign in
                   </Link>

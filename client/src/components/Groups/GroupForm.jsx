@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const GroupFormOverlay = ({ onCancel, onSave }) => {
+const GroupForm = ({ onCancel, onSave }) => {
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -186,4 +186,4 @@ const GroupFormOverlay = ({ onCancel, onSave }) => {
   );
 };
 
-export default GroupFormOverlay;
+export default GroupForm;

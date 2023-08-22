@@ -1,9 +1,10 @@
 import React from "react";
+import "./Navbar.css";
 
 const Navbar = ({ title }) => {
   return (
-    <div>
-      <h1 className="text-4xl text-center font-bold pt-10">
+    <div className="navbar">
+      <h1 className="lg:text-4xl text-xl text-center font-bold pt-10">
         Welcome to your {title}!
       </h1>
     </div>

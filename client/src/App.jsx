@@ -1,16 +1,17 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import SignUp from "./components/SignUp.jsx";
-import Dashboard from "./components/Dashboard.jsx";
-import Tasks from "./components/Tasks/Tasks.jsx";
-import Groups from "./components/Groups/Groups.jsx";
+import Login from "./pages/Login.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Tasks from "./pages/Tasks.jsx";
+import Groups from "./pages/Groups.jsx";
+import Events from "./pages/Events.jsx";
+import About from "./pages/About";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import SettingsPage from "./pages/Settings.jsx";
+import Messages from "./pages/Messages.jsx";
+
 import Group from "./components/Groups/Group.jsx";
-import Events from "./components/EventsPage/Events.jsx";
-import About from "./components/About";
-import ErrorPage from "./components/ErrorPage.jsx";
-import SettingsPage from "./components/Settings.jsx";
-import Messages from "./components/Messages.jsx";
 
 const App = () => {
   const router = createBrowserRouter([

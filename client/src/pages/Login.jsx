@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (cookies.token) {
+        navigate("/dashboard");
+      }
+    };
+    verifyCookie();
+  }, [cookies, navigate]);
+
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
@@ -18,18 +29,6 @@ const Login = () => {
     setInputValue({
       ...inputValue,
       [name]: value,
-    });
-  };
-
-  const handleError = (err) => {
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  };
-
-  const handleSuccess = (msg) => {
-    toast.success(msg, {
-      position: "bottom-left",
     });
   };
 
@@ -45,12 +44,11 @@ const Login = () => {
 
       const { success, message } = data;
       if (success) {
-        handleSuccess(message);
         setTimeout(() => {
           navigate("/dashboard");
         }, 1000);
       } else {
-        handleError(message);
+        console.log(message);
       }
     } catch (error) {
       console.log(error);
@@ -181,7 +179,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

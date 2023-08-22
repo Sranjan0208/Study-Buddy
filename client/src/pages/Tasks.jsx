@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-
-import TaskColumn from "./TaskColumn";
-import Sidebar from "../Sidebar";
-import Navbar from "../Navbar";
+import TaskColumn from "../components/Tasks/TaskColumn";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 
 const Tasks = () => {
   // server-side logic
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -23,21 +21,15 @@ const Tasks = () => {
         {},
         { withCredentials: true }
       );
-      console.log(data);
+      const { status } = data;
 
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? console.log(`Hello ${user}`)
-        : (removeCookie("token"), navigate("/login"));
+      if (!status) {
+        removeCookie("token");
+        navigate("/login");
+      }
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
-
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/signup");
-  };
 
   // Client-side logic
   const [todoTasks, setTodoTasks] = useState([]);
@@ -173,14 +165,14 @@ const Tasks = () => {
     <div className="bg-yellow-50 h-[100%]">
       <Navbar title="Tasks" />
       <main class=" h-screen relative overflow-auto">
-        <div class="px-6 py-8 h-[90%]">
-          <div class="max-w-[100%] h-[100%] flex">
+        <div class="px-6 py-8 lg:h-[90%] h-[100%]">
+          <div class="max-w-[100%] h-[100%] lg:flex flex flex-col">
             <Sidebar />
-            <div class="bg-white rounded-3xl p-8 mb-5 w-[80%] relative right-[-18%] h-auto overflow-y-auto ">
-              <h1 class="text-3xl font-bold mb-10">Tasks</h1>
+            <div class="bg-white rounded-3xl p-8 mb-5 lg:w-[80%] w-[100%] relative lg:right-[-18%] h-auto overflow-y-auto ">
+              <h1 class="lg:text-3xl text-xl font-bold mb-10">Tasks</h1>
 
               <hr class="my-10" />
-              <div className="grid grid-cols-3 gap-4 p-8">
+              <div className="lg:grid lg:grid-cols-3 lg:gap-4 grid grid-cols-1 grid-rows-3 gap-4 lg:p-8 p-1">
                 <TaskColumn
                   title="Todo"
                   tasks={todoTasks}

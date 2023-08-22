@@ -13,7 +13,6 @@ module.exports.userVerificationForTask = (req, res, next) => {
     } else {
       const user = await User.findById(data.id);
       if (user) {
-        // errors faced here: Error: Can't set headers after they are sent. Solution: particular error occurs whenever you try to send more than one response to the same request
         req.user = user;
         next();
       } else {

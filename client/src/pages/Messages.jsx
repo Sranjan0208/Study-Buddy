@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import { useEffect, useState } from "react";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -9,7 +9,6 @@ import axios from "axios";
 const Messages = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -21,33 +20,28 @@ const Messages = () => {
         {},
         { withCredentials: true }
       );
-      console.log(data);
+      const { status } = data;
 
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? console.log(`Hello ${user}`)
-        : (removeCookie("token"), navigate("/login"));
+      if (!status) {
+        removeCookie("token");
+        navigate("/login");
+      }
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/signup");
-  };
   return (
     <div className="bg-yellow-50 h-[100%]">
       <Navbar title="Messages" />
 
       <main class=" h-screen relative overflow-auto">
-        <div class="px-6 py-8 h-[90%]">
-          <div class="max-w-[100%] h-[100%] flex">
+        <div class="px-6 py-8 lg:h-[90%] h-[100%]">
+          <div class="max-w-[100%] h-[100%] lg:flex flex flex-col">
             <Sidebar />
-            <div class="bg-white rounded-3xl p-8 mb-5 w-[80%] relative right-[-18%] h-auto overflow-y-auto">
-              <h1 class="text-3xl font-bold mb-10">Messages</h1>
+            <div class="bg-white rounded-3xl p-8 mb-5 lg:w-[80%] w-[100%] relative lg:right-[-18%] h-auto overflow-y-auto">
+              <h1 class="lg:text-3xl text-xl font-bold mb-10">Messages</h1>
               <hr class="my-5" />
-              <h1 className="flex items-center justify-center text-4xl">
+              <h1 className="flex items-center justify-center text-xl lg:text-4xl">
                 COMING SOON !!
               </h1>
             </div>
