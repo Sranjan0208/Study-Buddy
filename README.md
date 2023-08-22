@@ -2,6 +2,9 @@
 
 The Study Buddy Matching App is a web application designed to help college students find compatible study partners and create study groups for collaborative learning. It provides a platform for students to connect, collaborate, and succeed together in their academic endeavors.
 
+# Idea behind the App
+During the exam period, many students face challenges when trying to comprehend complex subjects. Often, the solution is to reach out to friends or classmates for help. However, this can be time-consuming, especially when coordinating with multiple people. The Study Buddy Matching App aims to solve this problem by providing an efficient and organized way to connect students who are seeking study partners or looking to join study groups. By doing so, the app simplifies the process of seeking academic support and fosters a collaborative learning environment.
+
 ## Features
 
 - **User Registration and Login**: Users can create an account or log in using their credentials to access the study buddy matching platform.
@@ -31,24 +34,24 @@ The Study Buddy Matching App is built using the MERN (MongoDB, Express.js, React
 
 - Additional Tools and Libraries:
   - Axios: HTTP client for making API requests from the client to the server.
-  - Bootstrap or Material-UI: CSS frameworks for styling and enhancing the user interface.
+  - Tailwind: CSS frameworks for styling and enhancing the user interface.
   - JWT (JSON Web Tokens): Token-based authentication for securing user sessions.
 
 ## Getting Started
 
 To run the Study Buddy Matching App locally, follow these steps:
 
-1. Clone the repository: `git clone [repository URL]`
-2. Navigate to the project directory: `cd study-buddy-app`
+1. Clone the repository: `git clone https://github.com/Sranjan0208/Study-Buddy.git`
+2. Navigate to the project directory: `cd study-buddy`
 3. Install the dependencies:
    - Server: `cd server` then `npm install`
    - Client: `cd client` then `npm install`
 4. Set up environment variables:
    - Create a `.env` file in the `server` directory and add necessary environment variables (database connection string, JWT secret, etc.).
 5. Start the development servers:
-   - Server: In the `server` directory, run `npm start` to start the Express.js server.
-   - Client: In the `client` directory, run `npm start` to start the React development server.
-6. Open your web browser and access the app at `http://localhost:3000`.
+   - Server: In the `server` directory, run `nodemon server.js` to start the Express.js server.
+   - Client: In the `client` directory, run `npm run dev` to start the React development server.
+6. Open your web browser and access the app at `http://localhost:5173`.
 
 ## Contributing
 
