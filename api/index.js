@@ -34,7 +34,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://study-buddy-backend-alpha.vercel.app",
+      "https://study-buddy-backend-alpha.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
