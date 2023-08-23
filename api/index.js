@@ -13,7 +13,7 @@ const { DATABASE, PORT } = process.env;
 
 const io = new Server(3000, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://study-buddy-frontend-opal.vercel.app",
     methods: ["GET", "POST"],
   },
 });
@@ -33,7 +33,7 @@ app.listen(PORT, () => {
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "https://study-buddy-frontend-opal.vercel.app/",
       "https://study-buddy-backend-alpha.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
