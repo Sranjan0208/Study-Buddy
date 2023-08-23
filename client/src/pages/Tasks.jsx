@@ -17,7 +17,7 @@ const Tasks = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000",
+        "https://study-buddy-backend-alpha.vercel.app",
         {},
         { withCredentials: true }
       );
@@ -38,9 +38,12 @@ const Tasks = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/tasks", {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        "https://study-buddy-backend-alpha.vercel.app/tasks",
+        {
+          withCredentials: true,
+        }
+      );
 
       console.log(data);
 
@@ -60,7 +63,7 @@ const Tasks = () => {
   const handleAddTask = async (title, column) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/tasks",
+        "https://study-buddy-backend-alpha.vercel.app/tasks",
         {
           title,
           column,
@@ -96,7 +99,7 @@ const Tasks = () => {
   const handleEditTask = async (taskId, newTitle, column) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/tasks/${taskId}`,
+        `https://study-buddy-backend-alpha.vercel.app/tasks/${taskId}`,
         {
           title: newTitle,
           column,
@@ -134,9 +137,12 @@ const Tasks = () => {
 
   const handleDeleteTask = async (taskId, column) => {
     try {
-      await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://study-buddy-backend-alpha.vercel.app/tasks/${taskId}`,
+        {
+          withCredentials: true,
+        }
+      );
       switch (column) {
         case "Todo":
           setTodoTasks((prevTasks) =>

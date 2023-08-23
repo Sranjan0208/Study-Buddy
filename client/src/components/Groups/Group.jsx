@@ -22,7 +22,7 @@ const Group = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000",
+        "https://study-buddy-backend-alpha.vercel.app",
         {},
         { withCredentials: true }
       );

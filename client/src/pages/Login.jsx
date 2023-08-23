@@ -36,7 +36,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/login",
+        "https://study-buddy-backend-alpha.vercel.app/login",
         { ...inputValue },
         { withCredentials: true }
       );

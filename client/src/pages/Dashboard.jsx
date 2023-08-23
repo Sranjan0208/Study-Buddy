@@ -16,7 +16,7 @@ const Dashboard = () => {
         navigate("/login");
       }
       const { data } = await axios.post(
-        "http://localhost:8000",
+        "https://study-buddy-backend-alpha.vercel.app",
         {},
         { withCredentials: true }
       );
@@ -36,9 +36,12 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/tasks", {
-        withCredentials: true,
-      });
+      const { data } = await axios.get(
+        "https://study-buddy-backend-alpha.vercel.app/tasks",
+        {
+          withCredentials: true,
+        }
+      );
 
       console.log(data);
 

@@ -16,7 +16,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/logout",
+        "https://study-buddy-backend-alpha.vercel.app/logout",
         {},
         { withCredentials: true }
       );
